@@ -1,0 +1,39 @@
+{% extends 'base.html' %} {% block body %}
+
+<button onclick="handleClick()"></button>
+
+<script>
+    var socket = new WebSocket('ws://127.0.0.1:8000/api/v1/chat/');
+
+    socket.onopen = function (e) {
+        console.log('[open] Connection established');
+        console.log('Sending to server');
+        socket.send(JSON.stringify({ name: 'My name is John' }));
+    };
+
+    socket.onmessage = function (event) {
+        console.log(`[message] Data received from server: ${event.data}`);
+    };
+
+    socket.onclose = function (event) {
+        if (event.wasClean) {
+            console.log(
+                `[close] Connection closed cleanly, code=${event.code}`
+            );
+        } else {
+            // e.g. server process killed or network down
+            // event.code is usually 1006 in this case
+            console.log('[close] Connection died');
+        }
+    };
+
+    socket.onerror = function (error) {
+        console.log(`[error] ${error.message}`);
+    };
+</script>
+<script>
+    const handleClick = () => {
+        socket.send(JSON.stringify({ msg: 'hello world' }));
+    };
+</script>
+{% endblock body %}
