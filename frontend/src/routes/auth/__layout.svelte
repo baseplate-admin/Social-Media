@@ -1,3 +1,7 @@
+<script lang="ts">
+	import logo from '$lib/assets/img/logo.avif';
+</script>
+
 <svelte:head>
 	<link
 		async
@@ -12,7 +16,6 @@
 		href="https://cdn.jsdelivr.net/npm/typeface-ubuntu@1.1.13/index.min.css"
 	/>
 </svelte:head>
-
 <section class="hero is-fullheight">
 	<div class="hero-body">
 		<div class="container">
@@ -26,18 +29,13 @@
 					<div class="icon-box box">
 						<div class="columns is-mobile is-centered">
 							<div class="column is-narrow">
-								<!-- <a
-                                    href="{% url 'api_avatar' request.user.id %}?s=96"
-                                    class="progressive replace"
-                                    style="border-radius: 9999px"
-                                >
-                                    <img
-                                        src="{% static 'images/logos/logo.avif' %}"
-                                        style="width: 150px; height: 40px"
-                                        width="150"
-                                        height="40"
-                                    />
-                                </a> -->
+								<img
+									src={logo}
+									alt="logo"
+									style="width: 150px; height: 40px"
+									width="150"
+									height="40"
+								/>
 							</div>
 						</div>
 					</div>

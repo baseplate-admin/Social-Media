@@ -14,8 +14,12 @@
 			scale: 1.5
 		});
 	});
-
+	// Declare variables here
 	let passwordType: 'password' | 'text' = 'password';
+
+	// bound variables
+	let email: string = '';
+	let password: string = '';
 
 	const handleEyeClick = () => {
 		switch (passwordType) {
@@ -27,14 +31,25 @@
 				break;
 		}
 	};
+
+	const handleEmail = (e) => {
+		email = e?.target?.value;
+	};
+	const handlePassword = (e) => {
+		password = e?.target?.value;
+	};
+
+	const handleFormSubmit = (e) => {
+		console.log(email, password);
+	};
 </script>
 
-<form method="POST" x-trap="true">
+<form method="POST" on:submit|preventDefault={handleFormSubmit}>
 	<div class="items field is-horizontal">
 		<div class="field-body">
 			<div class="field">
 				<p class="control is-expanded has-icons-left">
-					<input class="input" placeholder="Username" type="text" />
+					<input class="input" placeholder="Username" type="text" on:input={handleEmail} />
 
 					<span class="icon is-small is-left">
 						<ion-icon class="animejs__account__icon" name="person-circle-outline" />
@@ -51,13 +66,14 @@
 						class="input"
 						placeholder="Password"
 						type={passwordType?.toLowerCase()}
-						on:click={handleEyeClick}
+						on:input={handlePassword}
 					/>
 					<span
 						class="
                             icon
                             is-small is-right is-clickable is-unselectable
                         "
+						on:click={handleEyeClick}
 					>
 						👀
 					</span>
@@ -87,9 +103,7 @@
 			<p class="new_here_tag">
 				New here?
 				<span class="has-text-link">
-					<!-- <a class="href_tag" href="">
-                        Register an account
-                    </a> -->
+					<a class="href_tag" href="register"> Register an account </a>
 				</span>
 			</p>
 		</div>
