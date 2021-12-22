@@ -8,3 +8,9 @@
 </script>
 
 <slot />
+
+<style global>
+	ion-icon {
+		visibility: inherit !important;
+	}
+</style>
