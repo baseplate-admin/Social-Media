@@ -1,0 +1,23 @@
+:root {
+	--html-color: black;
+	--navbar-color: black;
+	--border-color: #353333;
+	--button-border-color: hsl(0, 0%, 20%);
+	--button-color-hover: hsl(0, 0%, 5%);
+	--error-message-color: #ff0000;
+}
+html {
+	background-color: var(--html-color) !important;
+	scrollbar-width: thin;
+}
+ion-icon {
+	pointer-events: none;
+}
+body {
+	overflow-x: hidden;
+}
+
+// Bulma override
+.has-text-link-override {
+	color: #1d9bf0 !important;
+}
