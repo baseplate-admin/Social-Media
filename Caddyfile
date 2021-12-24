@@ -1,0 +1,19 @@
+
+
+127.0.0.1 {
+
+    handle /* {
+        encode zstd gzip
+
+        reverse_proxy {
+            to 127.0.0.1:8000
+        }
+    }
+
+    handle /static/* {
+        uri strip_prefix /static
+        file_server {
+            root C:/Programming/Social-Media/backend/staticfiles
+        }
+    }
+}

@@ -9,7 +9,6 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-import os
 from pathlib import Path, PurePath
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -38,7 +37,6 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     # Whitenoise patching
-    "whitenoise.runserver_nostatic",
     "django.contrib.staticfiles",
     # Custom stuff
     "custom.user",
@@ -60,7 +58,6 @@ MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",  # 1
     # Whitenoise
     "django.middleware.cache.UpdateCacheMiddleware",  # 2
-    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",  # 4
     "django.middleware.http.ConditionalGetMiddleware",  # 5
     "django.middleware.common.CommonMiddleware",  # 7
@@ -161,9 +158,7 @@ STATIC_URL = "/static/"
 STATICFILES_DIRS = [
     PurePath(BASE_DIR, "static"),
 ]
-
 STATIC_ROOT = PurePath(BASE_DIR, "staticfiles")
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = PurePath(BASE_DIR, "media")
