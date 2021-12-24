@@ -1,8 +1,6 @@
 from typing import Optional
 
-from django.urls import reverse
 from django.contrib import messages
-from django.shortcuts import redirect
 from django.core.mail import send_mail
 from django.contrib.auth import login
 from django.contrib.auth import logout

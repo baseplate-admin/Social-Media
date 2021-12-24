@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-
+import os
 from pathlib import Path, PurePath
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -21,7 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-REDIS = False
+REDIS: bool = True
 
 
 # Custom login
@@ -37,10 +37,12 @@ INSTALLED_APPS = [
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
+    # Whitenoise patching
     "whitenoise.runserver_nostatic",
     "django.contrib.staticfiles",
     # Custom stuff
     "custom.user",
+    "custom.statistics",
     # Channels
     "channels",
     # API
@@ -53,7 +55,6 @@ INSTALLED_APPS = [
 ]
 
 # https://docs.djangoproject.com/en/3.2/ref/middleware/#middleware-ordering
-
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",  # 1
@@ -176,23 +177,26 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # https://channels.readthedocs.io/en/stable/topics/channel_layers.html
 
 if REDIS:
-    # Failsafe
-    import channels_redis
+    try:
+        # Failsafe
+        import channels_redis
 
-    CHANNEL_LAYERS = {
-        "default": {
-            "BACKEND": "channels_redis.core.RedisChannelLayer",
-            "CONFIG": {
-                "hosts": [("127.0.0.1", 6379)],
+        CHANNEL_LAYERS = {
+            "default": {
+                "BACKEND": "channels_redis.core.RedisChannelLayer",
+                "CONFIG": {
+                    "hosts": [("127.0.0.1", 6379)],
+                },
             },
-        },
-    }
-else:
-    CHANNEL_LAYERS = {
-        "default": {
-            "BACKEND": "channels.layers.InMemoryChannelLayer",
         }
-    }
+
+    except ImportError:
+        CHANNEL_LAYERS = {
+            "default": {
+                "BACKEND": "channels.layers.InMemoryChannelLayer",
+            }
+        }
+
 
 # Cache system
 # https://docs.djangoproject.com/en/4.0/topics/cache/#redis

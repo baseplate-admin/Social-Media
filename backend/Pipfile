@@ -11,6 +11,7 @@ channels = "*"
 channels-redis={version='*', markers="platform_system != 'Windows'"}
 # 3rd party
 whitenoise = {extras = ["brotli"], version = "*"}
+
 # Daphne
 twisted = {extras = ["http2", "tls"], version = "*"}
 ## Async http client
