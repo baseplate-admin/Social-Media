@@ -69,6 +69,8 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     # Request Middleware
     "core.middlewares.request.RequestMiddleware",
+    # Strip whitespace
+    # "strip_whitespace.middlewares.HtmlStripWhiteSpaceMiddleware.html_strip_whitespace",
 ]
 
 ROOT_URLCONF = "core.urls"

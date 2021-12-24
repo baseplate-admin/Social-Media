@@ -39,16 +39,6 @@ def auth_logout(request: HttpRequest) -> None:
     logout(request)
 
 
-async def check_redirect(request: HttpRequest) -> None:
-    next_url = request.GET.get("next", None)
-
-    # If theres next url redirect there
-    if next_url:
-        return redirect(next_url)
-
-    return redirect(reverse("home_page"))
-
-
 @sync_to_async()
 def check_if_username_exist(username: str) -> bool:
     return User.objects.filter(username=username).exists()

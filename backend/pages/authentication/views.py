@@ -8,7 +8,6 @@ from .services import (
     auth_login,
     auth_logout,
     check_if_username_exist,
-    check_redirect,
     check_register_form_validity,
     create_new_reset_database,
     create_new_user,
@@ -32,9 +31,13 @@ async def login_page(request):
             password: str = form.cleaned_data["password"]
             user = await get_user_for_auth(username, password)
 
+            next_url = request.GET.get("next", None)
+            # If theres next url redirect there
+            if next_url:
+                return redirect(next_url)
+
             if user:
                 await auth_login(request, user)
-                await check_redirect(request)
 
             elif user is None:
                 messages.warning(request, "No such user.")
@@ -46,7 +49,12 @@ async def login_page(request):
 
 async def logout(request):
     await auth_logout(request)
-    await check_redirect(request)
+
+    next_url = request.GET.get("next", None)
+    # If theres next url redirect there
+    if next_url:
+        return redirect(next_url)
+
     return redirect(reverse("home_page"))
 
 
