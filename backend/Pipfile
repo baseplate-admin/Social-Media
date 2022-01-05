@@ -16,6 +16,7 @@ httpx = {extras = ["brotli", "http2"], version = "*"}
 ## Image resizer
 pillow = "*"
 pillow-avif-plugin = "*"
+libravatar-py = "*"
 
 [dev-packages]
 black = "*"
@@ -29,6 +30,5 @@ allow_prereleases = true
 
 [scripts]
 dev = "python ./manage.py runserver"
-prod = 'daphne -b 0.0.0.0 -p 8000 core.asgi:application'
 sync = 'python ./manage.py migrate'
 mksync = 'python ./manage.py makemigrations'

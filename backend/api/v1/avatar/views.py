@@ -27,8 +27,8 @@ async def avatar(request, user_id) -> HttpResponse:
     )
 
     email = user.email
-    query = await libravatar_raw_query(email, dict(request.GET))
-    result = await query
+    result = await libravatar_raw_query(email, dict(request.GET))
+
     # Remove link to remove tracking
     result.headers.pop("Link", None)
 

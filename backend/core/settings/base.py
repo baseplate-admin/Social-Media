@@ -60,8 +60,10 @@ MIDDLEWARE = [
     "django.middleware.cache.UpdateCacheMiddleware",  # 2
     "django.contrib.sessions.middleware.SessionMiddleware",  # 4
     "django.middleware.http.ConditionalGetMiddleware",  # 5
+    # "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",  # 7
     "django.middleware.csrf.CsrfViewMiddleware",  # 8
+    "django.middleware.gzip.GZipMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",  # 9
     "django.contrib.messages.middleware.MessageMiddleware",  # 10
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
